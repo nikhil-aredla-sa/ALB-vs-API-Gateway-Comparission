@@ -1,0 +1,43 @@
+{
+  "info": {
+    "name": "ALB-vs-APIGateway-Load-Test",
+    "description": "Identical 'list' request fired at both front doors. Run once against the ALB URL and once against the API Gateway Invoke URL, changing only the request URL between runs, so the comparison isolates the front door itself rather than the request shape.",
+    "schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+  },
+  "item": [
+    {
+      "name": "List items (via ALB)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"list\"\n}"
+        },
+        "url": {
+          "raw": "http://YOUR-ALB-DNS-NAME/items",
+          "protocol": "http",
+          "host": ["YOUR-ALB-DNS-NAME"],
+          "path": ["items"]
+        }
+      }
+    },
+    {
+      "name": "List items (via API Gateway)",
+      "request": {
+        "method": "POST",
+        "header": [{ "key": "Content-Type", "value": "application/json" }],
+        "body": {
+          "mode": "raw",
+          "raw": "{\n  \"operation\": \"list\"\n}"
+        },
+        "url": {
+          "raw": "https://YOUR-API-ID.execute-api.YOUR-REGION.amazonaws.com/prod/items",
+          "protocol": "https",
+          "host": ["YOUR-API-ID.execute-api.YOUR-REGION.amazonaws.com"],
+          "path": ["prod", "items"]
+        }
+      }
+    }
+  ]
+}
