@@ -130,8 +130,3 @@ My take:
 
 This test's throughput (~117 req/s sustained) is nowhere near a 2-minute-only figure — it's genuinely high enough, if it reflected real 24/7 production traffic, to land far past the earlier-calculated crossover point (~2 req/s, or ~4.8M requests/month). At this workload's measured rate, API Gateway would cost roughly 24x what ALB would, a gap far too large to ignore in favor of API Gateway's operational simplicity alone. The obvious caveat: this workload was a 2-minute burst, not genuine sustained traffic, so this projection only holds if the real production traffic pattern actually resembles ~117 req/s around the clock. For a workload with this kind of sustained volume, ALB is the clear cost winner; for anything spikier or lower-volume, the actual crossover calculation should be rerun against the real expected traffic shape, not this test's rate.
 
-## What this project demonstrates
-
-- The same Lambda function, unmodified, working correctly behind two structurally different AWS entry points
-- A methodology for comparing AWS services empirically (identical function, identical load profile) rather than relying on published comparison tables alone
-- Applying the Well-Architected Framework's "it depends" answer to "is serverless always better" with actual data, not just the talking point
